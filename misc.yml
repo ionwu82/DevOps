@@ -1,0 +1,20 @@
+---
+-
+  hosts: all
+  vars:
+    motd_ubuntu: "Welcome to Ubuntu\n"
+    motd_redhat: "Welcome to RedHat\n"
+  tasks:
+    - name: configure message of the day Ubuntu
+      copy:
+        content: "{{motd_ubuntu}}"
+        dest: /etc/motd
+
+      when: ansible_distribution == 'Ubuntu'
+
+    - name: configure message of the day RedHat
+      copy:
+        content: "{{motd_redhat}}"
+        dest: /etc/motd
+
+      when: ansible_distribution == 'RedHat'
